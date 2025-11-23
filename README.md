@@ -1,26 +1,50 @@
-# simple-counter
+# TON Tolk Counter Contract (Testnet)
 
-## Project structure
+A minimal, fully working **counter smart contract** written in **Tolk** — successfully compiled, deployed, and verified on TON testnet using **Tolk 1.2.0** and Blueprint.
 
--   `contracts` - source code of all the smart contracts of the project and their dependencies.
--   `wrappers` - wrapper classes (implementing `Contract` from ton-core) for the contracts, including any [de]serialization primitives and compilation functions.
--   `tests` - tests for the contracts.
--   `scripts` - scripts used by the project, mainly the deployment scripts.
+This is one of the rare public Tolk projects that actually **works** in 2025 — after surviving every breaking change in Tolk 1.2.0.
 
-## How to use
+**Live contract on TON Testnet:**  
+https://testnet.tonscan.org/address/EQB9P3PL73I2geJnUlX7tajbFlA37KW7M1Y4Hup2IXZ2vhvR
 
-### Build
+## Features
+- Increment counter by any amount
+- Reset counter to 0
+- Safe getter (never throws exit_code 9)
+- Storage properly initialized on deployment
+- Mnemonic-based deployment (no TON Connect required)
+- Clean, minimal code — perfect as a starter template
 
-`npx blueprint build` or `yarn blueprint build`
+## Contract Address (Testnet)
+kQBc5iJylS1jtxAZeONWMZD9LLaI827xnnWmyLhyKTEhr1lH
 
-### Test
+## Quick Interaction Commands
 
-`npx blueprint test` or `yarn blueprint test`
+# Get current counter value
+npx blueprint run getCounter --testnet --mnemonic
 
-### Deploy or run another script
+# Increment by 1
+npx blueprint run increaseCounter --testnet --mnemonic
 
-`npx blueprint run` or `yarn blueprint run`
+# Reset to 0
+npx blueprint run resetCounter --testnet --mnemonic
 
-### Add a new contract
+## Project Structure
+contracts/counter.tolk        ← Tolk smart contract
+wrappers/Counter.ts           ← ton-core wrapper
+scripts/
+  deployCounter.ts
+  getCounter.ts
+  increaseCounter.ts
+  resetCounter.ts
 
-`npx blueprint create ContractName` or `yarn blueprint create ContractName`
+Setup & Run Locally
+npm install
+npx blueprint build Counter
+
+## Deploy using your testnet wallet (add .env first)
+npx blueprint run deployCounter --testnet --mnemonic
+
+## Create .env in project root:
+WALLET_MNEMONIC="your mnemonic words here"
+WALLET_VERSION="v5r1"
